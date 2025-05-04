@@ -1,0 +1,82 @@
+syntax = "proto2";
+
+package ssl_packet_package;
+
+enum RobotControlType {
+    OLD_FORMAT = 0;
+    KICKER_AND_DRIBBLER = 1;
+    SPEED_CONTROL = 2;
+    COORDINATE_CONTROL = 3;
+    GLOBAL_COORDINATES = 4;
+}
+
+message OldFormat {
+    required float vel_x = 1;
+    required float vel_y = 2;
+    required float angular_velocity_or_delta_angle = 3;
+    required float kicker_voltage = 4;
+    required float dribbler_voltage = 5;
+    required bool high_voltage = 6;
+    required bool dribbler_is_enabled = 7;
+    required bool angvel_angle_toggle = 8;
+    required bool kick_high = 9;
+    required bool kick_straight = 10;
+    required bool autokick_high = 11;
+    required bool autokick_straight = 12;
+    reserved 13;
+}
+
+enum KickerMode {
+    IDLE = 0;
+    KICK_STRAIGHT = 1;
+    KICK_HIGH = 2;
+    AUTOKICK_STRAIGHT = 3;
+    AUTOKICK_HIGH = 4;
+}
+
+message KickerAndDribbler {
+    required KickerMode kicker_mode = 1;
+
+    required float kicker_voltage = 2;
+    required float dribbler_voltage = 3;
+}
+
+message SpeedControl {
+    required float vel_x = 1;
+    required float vel_y = 2;
+    oneof angular_velocity_or_angle {
+        float angular_velocity = 3;
+        float delta_angle = 4;
+    }
+}
+
+message Target {
+    required uint32 id = 1;
+    required float x = 2;
+    required float y = 3;
+    required float vx = 4;
+    required float vy = 5;
+    required float angle = 6;
+}
+
+message CoordinateControl {
+    repeated Target targets = 1;
+}
+
+message GlobalCoordinates {
+    required float x = 1;
+    required float y = 2;
+    required float angle = 3;
+}
+
+message RobotCommand {
+    required uint32 robot_id = 1;
+
+    oneof control {
+        OldFormat old_format = 2;
+        KickerAndDribbler kicker_and_dribbler = 3;
+        SpeedControl speed_control = 4;
+        CoordinateControl coordinate_control = 5;
+        GlobalCoordinates global_coordinates = 6;
+    }
+}

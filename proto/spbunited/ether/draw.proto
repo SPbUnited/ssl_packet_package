@@ -1,0 +1,86 @@
+syntax = "proto3";
+
+package ether.draw;
+
+message DrawCommand {
+  // Map of layer names (e.g., "draw_test") to their content
+  map<string, Layer> layers = 1;
+}
+
+message Layer {
+  repeated DrawObject data = 1;  // List of draw objects
+  bool is_visible = 2;           // Visibility flag for the layer
+}
+
+message DrawObject {
+  oneof object {
+    RobotYel robot_yel = 1;
+    RobotBlu robot_blu = 2;
+    Ball ball = 3;
+    Line line = 4;
+    Arrow arrow = 5;
+    Polygon polygon = 6;
+    Rect rect = 7;
+    Circle circle = 8;
+  }
+}
+
+// --------------------------
+// Object type definitions
+// --------------------------
+
+// Both robots share the same structure but have different types
+message RobotYel {
+  float x = 1;
+  float y = 2;
+  float rotation = 3;
+}
+
+message RobotBlu {
+  float x = 1;
+  float y = 2;
+  float rotation = 3;
+}
+
+message Ball {
+  float x = 1;
+  float y = 2;
+}
+
+message Line {
+  repeated float x_list = 1;  // List of x-coordinates
+  repeated float y_list = 2;  // List of y-coordinates
+  string color = 3;           // Hex color code
+  float width = 4;
+}
+
+message Arrow {
+  float x = 1;        // Start position
+  float y = 2;
+  float dx = 3;       // Direction vector
+  float dy = 4;
+  string color = 5;
+  float width = 6;
+}
+
+message Polygon {
+  repeated float x_list = 1;
+  repeated float y_list = 2;
+  string color = 3;
+  float width = 4;
+}
+
+message Rect {
+  float x = 1;
+  float y = 2;
+  float width = 3;
+  float height = 4;
+  string color = 5;
+}
+
+message Circle {
+  float x = 1;
+  float y = 2;
+  float radius = 3;
+  string color = 4;
+}
