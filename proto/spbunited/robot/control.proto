@@ -1,0 +1,86 @@
+
+syntax = "proto2";
+
+package robot.control;
+
+enum RobotControlType {
+    OLD_FORMAT = 0;
+    KICKER_AND_DRIBBLER = 1;
+    SPEED_CONTROL = 2;
+    COORDINATE_CONTROL = 3;
+    GLOBAL_COORDINATES = 4;
+}
+
+message OldFormat {
+    required sint32 vel_x = 1;
+    required sint32 vel_y = 2;
+    required sint32 angular_velocity_or_delta_angle = 3;
+    required uint32 kicker_setting = 4;
+    required uint32 dribbler_setting = 5;
+
+    reserved 6;
+    required bool autokick_straight = 7;
+    required bool autokick_high = 8;
+    required bool kick_straight = 9;
+    required bool kick_high = 10;
+    required bool angvel_angle_toggle = 11;
+    required bool dribbler_is_enabled = 12;
+    required bool high_voltage = 13;
+}
+
+enum KickerMode {
+    IDLE = 0;
+    KICK_STRAIGHT = 1;
+    KICK_HIGH = 2;
+    AUTOKICK_STRAIGHT = 3;
+    AUTOKICK_HIGH = 4;
+}
+
+message KickerAndDribbler {
+    required KickerMode kicker_mode = 1;
+
+    required uint32 kicker_setting = 2;
+    required uint32 dribbler_setting = 3;
+}
+
+message SpeedControl {
+    required float vel_x = 1; // [m/s]
+    required float vel_y = 2; // [m/s]
+    oneof angular_velocity_or_angle {
+        float angular_velocity = 3; // [rad/s]
+        float delta_angle = 4; // [rad]
+    }
+}
+
+message Target {
+    required uint32 id = 1;
+    required float x = 2; // [m]
+    required float y = 3; // [m]
+    required float vx = 4; // [m/s]
+    required float vy = 5; // [m/s]
+    required float angle = 6; // [rad]
+}
+
+message CoordinateControl {
+    repeated Target targets = 1;
+}
+
+message GlobalCoordinates {
+    required float x = 1; // [m]
+    required float y = 2; // [m]
+    required float angle = 3; // [rad]
+}
+
+message RobotCommand {
+    // optional so that it always prints when id is 0
+    // https://stackoverflow.com/questions/47373976/why-is-my-protobuf-message-in-python-ignoring-zero-values
+    required uint32 robot_id = 1;
+
+    oneof control {
+        OldFormat old_format = 2;
+        KickerAndDribbler kicker_and_dribbler = 3;
+        SpeedControl speed_control = 4;
+        CoordinateControl coordinate_control = 5;
+        GlobalCoordinates global_coordinates = 6;
+    }
+}
