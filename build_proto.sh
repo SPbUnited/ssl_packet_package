@@ -2,6 +2,8 @@
 
 # print commands
 set -x
+# exit on error
+set -e
 
 BUILD_TARGETS=$(ls proto)
 

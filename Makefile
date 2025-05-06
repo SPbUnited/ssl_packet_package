@@ -43,8 +43,6 @@ BIRED=\033[1;91m
 NC=\033[0m # No Color
 
 init: init_py
-	@echo "\n${YELLOW}Don't forget to do ${WHITE}source venv/bin/activate${NC}"
-	@echo "                   ~~~~~~~~~~~~~~~~~~~~~~~~"
 
 init_py:
 	@echo "${GREEN}============="
@@ -57,4 +55,4 @@ build:
 	@echo "${BLUE}============="
 	@echo "|   BUILD   |"
 	@echo "=============${NC}"
-	./build_proto.sh
+	. venv/bin/activate; ./build_proto.sh
