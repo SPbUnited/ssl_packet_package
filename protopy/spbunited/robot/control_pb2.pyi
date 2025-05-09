@@ -27,6 +27,7 @@ class _RobotControlTypeEnumTypeWrapper(google.protobuf.internal.enum_type_wrappe
     SPEED_CONTROL: _RobotControlType.ValueType
     COORDINATE_CONTROL: _RobotControlType.ValueType
     GLOBAL_COORDINATES: _RobotControlType.ValueType
+    CAP_VEL_AND_ACCEL: _RobotControlType.ValueType
 
 class RobotControlType(_RobotControlType, metaclass=_RobotControlTypeEnumTypeWrapper):
     ...
@@ -35,6 +36,7 @@ KICKER_AND_DRIBBLER: RobotControlType.ValueType
 SPEED_CONTROL: RobotControlType.ValueType
 COORDINATE_CONTROL: RobotControlType.ValueType
 GLOBAL_COORDINATES: RobotControlType.ValueType
+CAP_VEL_AND_ACCEL: RobotControlType.ValueType
 global___RobotControlType = RobotControlType
 
 class _KickerMode:
@@ -216,6 +218,26 @@ class GlobalCoordinates(google.protobuf.message.Message):
 global___GlobalCoordinates = GlobalCoordinates
 
 @typing.final
+class CapVelAndAccel(google.protobuf.message.Message):
+    DESCRIPTOR: google.protobuf.descriptor.Descriptor
+    MAX_VEL_FIELD_NUMBER: builtins.int
+    MAX_ACCEL_FIELD_NUMBER: builtins.int
+    max_vel: builtins.float
+    '[m/s]'
+    max_accel: builtins.float
+    '[m/s^2]'
+
+    def __init__(self, *, max_vel: builtins.float | None=..., max_accel: builtins.float | None=...) -> None:
+        ...
+
+    def HasField(self, field_name: typing.Literal['max_accel', b'max_accel', 'max_vel', b'max_vel']) -> builtins.bool:
+        ...
+
+    def ClearField(self, field_name: typing.Literal['max_accel', b'max_accel', 'max_vel', b'max_vel']) -> None:
+        ...
+global___CapVelAndAccel = CapVelAndAccel
+
+@typing.final
 class RobotCommand(google.protobuf.message.Message):
     DESCRIPTOR: google.protobuf.descriptor.Descriptor
     ROBOT_ID_FIELD_NUMBER: builtins.int
@@ -224,6 +246,7 @@ class RobotCommand(google.protobuf.message.Message):
     SPEED_CONTROL_FIELD_NUMBER: builtins.int
     COORDINATE_CONTROL_FIELD_NUMBER: builtins.int
     GLOBAL_COORDINATES_FIELD_NUMBER: builtins.int
+    CAP_VEL_AND_ACCEL_FIELD_NUMBER: builtins.int
     robot_id: builtins.int
     'optional so that it always prints when id is 0\n    https://stackoverflow.com/questions/47373976/why-is-my-protobuf-message-in-python-ignoring-zero-values\n    '
 
@@ -247,15 +270,19 @@ class RobotCommand(google.protobuf.message.Message):
     def global_coordinates(self) -> global___GlobalCoordinates:
         ...
 
-    def __init__(self, *, robot_id: builtins.int | None=..., old_format: global___OldFormat | None=..., kicker_and_dribbler: global___KickerAndDribbler | None=..., speed_control: global___SpeedControl | None=..., coordinate_control: global___CoordinateControl | None=..., global_coordinates: global___GlobalCoordinates | None=...) -> None:
+    @property
+    def cap_vel_and_accel(self) -> global___CapVelAndAccel:
         ...
 
-    def HasField(self, field_name: typing.Literal['control', b'control', 'coordinate_control', b'coordinate_control', 'global_coordinates', b'global_coordinates', 'kicker_and_dribbler', b'kicker_and_dribbler', 'old_format', b'old_format', 'robot_id', b'robot_id', 'speed_control', b'speed_control']) -> builtins.bool:
+    def __init__(self, *, robot_id: builtins.int | None=..., old_format: global___OldFormat | None=..., kicker_and_dribbler: global___KickerAndDribbler | None=..., speed_control: global___SpeedControl | None=..., coordinate_control: global___CoordinateControl | None=..., global_coordinates: global___GlobalCoordinates | None=..., cap_vel_and_accel: global___CapVelAndAccel | None=...) -> None:
         ...
 
-    def ClearField(self, field_name: typing.Literal['control', b'control', 'coordinate_control', b'coordinate_control', 'global_coordinates', b'global_coordinates', 'kicker_and_dribbler', b'kicker_and_dribbler', 'old_format', b'old_format', 'robot_id', b'robot_id', 'speed_control', b'speed_control']) -> None:
+    def HasField(self, field_name: typing.Literal['cap_vel_and_accel', b'cap_vel_and_accel', 'control', b'control', 'coordinate_control', b'coordinate_control', 'global_coordinates', b'global_coordinates', 'kicker_and_dribbler', b'kicker_and_dribbler', 'old_format', b'old_format', 'robot_id', b'robot_id', 'speed_control', b'speed_control']) -> builtins.bool:
         ...
 
-    def WhichOneof(self, oneof_group: typing.Literal['control', b'control']) -> typing.Literal['old_format', 'kicker_and_dribbler', 'speed_control', 'coordinate_control', 'global_coordinates'] | None:
+    def ClearField(self, field_name: typing.Literal['cap_vel_and_accel', b'cap_vel_and_accel', 'control', b'control', 'coordinate_control', b'coordinate_control', 'global_coordinates', b'global_coordinates', 'kicker_and_dribbler', b'kicker_and_dribbler', 'old_format', b'old_format', 'robot_id', b'robot_id', 'speed_control', b'speed_control']) -> None:
+        ...
+
+    def WhichOneof(self, oneof_group: typing.Literal['control', b'control']) -> typing.Literal['old_format', 'kicker_and_dribbler', 'speed_control', 'coordinate_control', 'global_coordinates', 'cap_vel_and_accel'] | None:
         ...
 global___RobotCommand = RobotCommand

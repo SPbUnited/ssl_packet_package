@@ -47,6 +47,9 @@ struct TableStruct_robot_2fcontrol_2eproto {
 extern const ::PROTOBUF_NAMESPACE_ID::internal::DescriptorTable descriptor_table_robot_2fcontrol_2eproto;
 namespace robot {
 namespace control {
+class CapVelAndAccel;
+struct CapVelAndAccelDefaultTypeInternal;
+extern CapVelAndAccelDefaultTypeInternal _CapVelAndAccel_default_instance_;
 class CoordinateControl;
 struct CoordinateControlDefaultTypeInternal;
 extern CoordinateControlDefaultTypeInternal _CoordinateControl_default_instance_;
@@ -71,6 +74,7 @@ extern TargetDefaultTypeInternal _Target_default_instance_;
 }  // namespace control
 }  // namespace robot
 PROTOBUF_NAMESPACE_OPEN
+template<> ::robot::control::CapVelAndAccel* Arena::CreateMaybeMessage<::robot::control::CapVelAndAccel>(Arena*);
 template<> ::robot::control::CoordinateControl* Arena::CreateMaybeMessage<::robot::control::CoordinateControl>(Arena*);
 template<> ::robot::control::GlobalCoordinates* Arena::CreateMaybeMessage<::robot::control::GlobalCoordinates>(Arena*);
 template<> ::robot::control::KickerAndDribbler* Arena::CreateMaybeMessage<::robot::control::KickerAndDribbler>(Arena*);
@@ -87,11 +91,12 @@ enum RobotControlType : int {
   KICKER_AND_DRIBBLER = 1,
   SPEED_CONTROL = 2,
   COORDINATE_CONTROL = 3,
-  GLOBAL_COORDINATES = 4
+  GLOBAL_COORDINATES = 4,
+  CAP_VEL_AND_ACCEL = 5
 };
 bool RobotControlType_IsValid(int value);
 constexpr RobotControlType RobotControlType_MIN = OLD_FORMAT;
-constexpr RobotControlType RobotControlType_MAX = GLOBAL_COORDINATES;
+constexpr RobotControlType RobotControlType_MAX = CAP_VEL_AND_ACCEL;
 constexpr int RobotControlType_ARRAYSIZE = RobotControlType_MAX + 1;
 
 const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* RobotControlType_descriptor();
@@ -1479,6 +1484,184 @@ class GlobalCoordinates final :
 };
 // -------------------------------------------------------------------
 
+class CapVelAndAccel final :
+    public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:robot.control.CapVelAndAccel) */ {
+ public:
+  inline CapVelAndAccel() : CapVelAndAccel(nullptr) {}
+  ~CapVelAndAccel() override;
+  explicit PROTOBUF_CONSTEXPR CapVelAndAccel(::PROTOBUF_NAMESPACE_ID::internal::ConstantInitialized);
+
+  CapVelAndAccel(const CapVelAndAccel& from);
+  CapVelAndAccel(CapVelAndAccel&& from) noexcept
+    : CapVelAndAccel() {
+    *this = ::std::move(from);
+  }
+
+  inline CapVelAndAccel& operator=(const CapVelAndAccel& from) {
+    CopyFrom(from);
+    return *this;
+  }
+  inline CapVelAndAccel& operator=(CapVelAndAccel&& from) noexcept {
+    if (this == &from) return *this;
+    if (GetOwningArena() == from.GetOwningArena()
+  #ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+        && GetOwningArena() != nullptr
+  #endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+    ) {
+      InternalSwap(&from);
+    } else {
+      CopyFrom(from);
+    }
+    return *this;
+  }
+
+  inline const ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  }
+  inline ::PROTOBUF_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+  }
+
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* descriptor() {
+    return GetDescriptor();
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Descriptor* GetDescriptor() {
+    return default_instance().GetMetadata().descriptor;
+  }
+  static const ::PROTOBUF_NAMESPACE_ID::Reflection* GetReflection() {
+    return default_instance().GetMetadata().reflection;
+  }
+  static const CapVelAndAccel& default_instance() {
+    return *internal_default_instance();
+  }
+  static inline const CapVelAndAccel* internal_default_instance() {
+    return reinterpret_cast<const CapVelAndAccel*>(
+               &_CapVelAndAccel_default_instance_);
+  }
+  static constexpr int kIndexInFileMessages =
+    6;
+
+  friend void swap(CapVelAndAccel& a, CapVelAndAccel& b) {
+    a.Swap(&b);
+  }
+  inline void Swap(CapVelAndAccel* other) {
+    if (other == this) return;
+  #ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() != nullptr &&
+        GetOwningArena() == other->GetOwningArena()) {
+   #else  // PROTOBUF_FORCE_COPY_IN_SWAP
+    if (GetOwningArena() == other->GetOwningArena()) {
+  #endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+      InternalSwap(other);
+    } else {
+      ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);
+    }
+  }
+  void UnsafeArenaSwap(CapVelAndAccel* other) {
+    if (other == this) return;
+    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
+    InternalSwap(other);
+  }
+
+  // implements Message ----------------------------------------------
+
+  CapVelAndAccel* New(::PROTOBUF_NAMESPACE_ID::Arena* arena = nullptr) const final {
+    return CreateMaybeMessage<CapVelAndAccel>(arena);
+  }
+  using ::PROTOBUF_NAMESPACE_ID::Message::CopyFrom;
+  void CopyFrom(const CapVelAndAccel& from);
+  using ::PROTOBUF_NAMESPACE_ID::Message::MergeFrom;
+  void MergeFrom( const CapVelAndAccel& from) {
+    CapVelAndAccel::MergeImpl(*this, from);
+  }
+  private:
+  static void MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg);
+  public:
+  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  bool IsInitialized() const final;
+
+  size_t ByteSizeLong() const final;
+  const char* _InternalParse(const char* ptr, ::PROTOBUF_NAMESPACE_ID::internal::ParseContext* ctx) final;
+  uint8_t* _InternalSerialize(
+      uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+
+  private:
+  void SharedCtor(::PROTOBUF_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+  void SharedDtor();
+  void SetCachedSize(int size) const final;
+  void InternalSwap(CapVelAndAccel* other);
+
+  private:
+  friend class ::PROTOBUF_NAMESPACE_ID::internal::AnyMetadata;
+  static ::PROTOBUF_NAMESPACE_ID::StringPiece FullMessageName() {
+    return "robot.control.CapVelAndAccel";
+  }
+  protected:
+  explicit CapVelAndAccel(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+                       bool is_message_owned = false);
+  public:
+
+  static const ClassData _class_data_;
+  const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+
+  ::PROTOBUF_NAMESPACE_ID::Metadata GetMetadata() const final;
+
+  // nested types ----------------------------------------------------
+
+  // accessors -------------------------------------------------------
+
+  enum : int {
+    kMaxVelFieldNumber = 1,
+    kMaxAccelFieldNumber = 2,
+  };
+  // required float max_vel = 1;
+  bool has_max_vel() const;
+  private:
+  bool _internal_has_max_vel() const;
+  public:
+  void clear_max_vel();
+  float max_vel() const;
+  void set_max_vel(float value);
+  private:
+  float _internal_max_vel() const;
+  void _internal_set_max_vel(float value);
+  public:
+
+  // required float max_accel = 2;
+  bool has_max_accel() const;
+  private:
+  bool _internal_has_max_accel() const;
+  public:
+  void clear_max_accel();
+  float max_accel() const;
+  void set_max_accel(float value);
+  private:
+  float _internal_max_accel() const;
+  void _internal_set_max_accel(float value);
+  public:
+
+  // @@protoc_insertion_point(class_scope:robot.control.CapVelAndAccel)
+ private:
+  class _Internal;
+
+  // helper for ByteSizeLong()
+  size_t RequiredFieldsByteSizeFallback() const;
+
+  template <typename T> friend class ::PROTOBUF_NAMESPACE_ID::Arena::InternalHelper;
+  typedef void InternalArenaConstructable_;
+  typedef void DestructorSkippable_;
+  struct Impl_ {
+    ::PROTOBUF_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
+    mutable ::PROTOBUF_NAMESPACE_ID::internal::CachedSize _cached_size_;
+    float max_vel_;
+    float max_accel_;
+  };
+  union { Impl_ _impl_; };
+  friend struct ::TableStruct_robot_2fcontrol_2eproto;
+};
+// -------------------------------------------------------------------
+
 class RobotCommand final :
     public ::PROTOBUF_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:robot.control.RobotCommand) */ {
  public:
@@ -1535,6 +1718,7 @@ class RobotCommand final :
     kSpeedControl = 4,
     kCoordinateControl = 5,
     kGlobalCoordinates = 6,
+    kCapVelAndAccel = 7,
     CONTROL_NOT_SET = 0,
   };
 
@@ -1543,7 +1727,7 @@ class RobotCommand final :
                &_RobotCommand_default_instance_);
   }
   static constexpr int kIndexInFileMessages =
-    6;
+    7;
 
   friend void swap(RobotCommand& a, RobotCommand& b) {
     a.Swap(&b);
@@ -1622,6 +1806,7 @@ class RobotCommand final :
     kSpeedControlFieldNumber = 4,
     kCoordinateControlFieldNumber = 5,
     kGlobalCoordinatesFieldNumber = 6,
+    kCapVelAndAccelFieldNumber = 7,
   };
   // required uint32 robot_id = 1;
   bool has_robot_id() const;
@@ -1726,6 +1911,24 @@ class RobotCommand final :
       ::robot::control::GlobalCoordinates* global_coordinates);
   ::robot::control::GlobalCoordinates* unsafe_arena_release_global_coordinates();
 
+  // .robot.control.CapVelAndAccel cap_vel_and_accel = 7;
+  bool has_cap_vel_and_accel() const;
+  private:
+  bool _internal_has_cap_vel_and_accel() const;
+  public:
+  void clear_cap_vel_and_accel();
+  const ::robot::control::CapVelAndAccel& cap_vel_and_accel() const;
+  PROTOBUF_NODISCARD ::robot::control::CapVelAndAccel* release_cap_vel_and_accel();
+  ::robot::control::CapVelAndAccel* mutable_cap_vel_and_accel();
+  void set_allocated_cap_vel_and_accel(::robot::control::CapVelAndAccel* cap_vel_and_accel);
+  private:
+  const ::robot::control::CapVelAndAccel& _internal_cap_vel_and_accel() const;
+  ::robot::control::CapVelAndAccel* _internal_mutable_cap_vel_and_accel();
+  public:
+  void unsafe_arena_set_allocated_cap_vel_and_accel(
+      ::robot::control::CapVelAndAccel* cap_vel_and_accel);
+  ::robot::control::CapVelAndAccel* unsafe_arena_release_cap_vel_and_accel();
+
   void clear_control();
   ControlCase control_case() const;
   // @@protoc_insertion_point(class_scope:robot.control.RobotCommand)
@@ -1736,6 +1939,7 @@ class RobotCommand final :
   void set_has_speed_control();
   void set_has_coordinate_control();
   void set_has_global_coordinates();
+  void set_has_cap_vel_and_accel();
 
   inline bool has_control() const;
   inline void clear_has_control();
@@ -1755,6 +1959,7 @@ class RobotCommand final :
       ::robot::control::SpeedControl* speed_control_;
       ::robot::control::CoordinateControl* coordinate_control_;
       ::robot::control::GlobalCoordinates* global_coordinates_;
+      ::robot::control::CapVelAndAccel* cap_vel_and_accel_;
     } control_;
     uint32_t _oneof_case_[1];
 
@@ -2649,6 +2854,66 @@ inline void GlobalCoordinates::set_angle(float value) {
 
 // -------------------------------------------------------------------
 
+// CapVelAndAccel
+
+// required float max_vel = 1;
+inline bool CapVelAndAccel::_internal_has_max_vel() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
+inline bool CapVelAndAccel::has_max_vel() const {
+  return _internal_has_max_vel();
+}
+inline void CapVelAndAccel::clear_max_vel() {
+  _impl_.max_vel_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000001u;
+}
+inline float CapVelAndAccel::_internal_max_vel() const {
+  return _impl_.max_vel_;
+}
+inline float CapVelAndAccel::max_vel() const {
+  // @@protoc_insertion_point(field_get:robot.control.CapVelAndAccel.max_vel)
+  return _internal_max_vel();
+}
+inline void CapVelAndAccel::_internal_set_max_vel(float value) {
+  _impl_._has_bits_[0] |= 0x00000001u;
+  _impl_.max_vel_ = value;
+}
+inline void CapVelAndAccel::set_max_vel(float value) {
+  _internal_set_max_vel(value);
+  // @@protoc_insertion_point(field_set:robot.control.CapVelAndAccel.max_vel)
+}
+
+// required float max_accel = 2;
+inline bool CapVelAndAccel::_internal_has_max_accel() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  return value;
+}
+inline bool CapVelAndAccel::has_max_accel() const {
+  return _internal_has_max_accel();
+}
+inline void CapVelAndAccel::clear_max_accel() {
+  _impl_.max_accel_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000002u;
+}
+inline float CapVelAndAccel::_internal_max_accel() const {
+  return _impl_.max_accel_;
+}
+inline float CapVelAndAccel::max_accel() const {
+  // @@protoc_insertion_point(field_get:robot.control.CapVelAndAccel.max_accel)
+  return _internal_max_accel();
+}
+inline void CapVelAndAccel::_internal_set_max_accel(float value) {
+  _impl_._has_bits_[0] |= 0x00000002u;
+  _impl_.max_accel_ = value;
+}
+inline void CapVelAndAccel::set_max_accel(float value) {
+  _internal_set_max_accel(value);
+  // @@protoc_insertion_point(field_set:robot.control.CapVelAndAccel.max_accel)
+}
+
+// -------------------------------------------------------------------
+
 // RobotCommand
 
 // required uint32 robot_id = 1;
@@ -3049,6 +3314,80 @@ inline ::robot::control::GlobalCoordinates* RobotCommand::mutable_global_coordin
   return _msg;
 }
 
+// .robot.control.CapVelAndAccel cap_vel_and_accel = 7;
+inline bool RobotCommand::_internal_has_cap_vel_and_accel() const {
+  return control_case() == kCapVelAndAccel;
+}
+inline bool RobotCommand::has_cap_vel_and_accel() const {
+  return _internal_has_cap_vel_and_accel();
+}
+inline void RobotCommand::set_has_cap_vel_and_accel() {
+  _impl_._oneof_case_[0] = kCapVelAndAccel;
+}
+inline void RobotCommand::clear_cap_vel_and_accel() {
+  if (_internal_has_cap_vel_and_accel()) {
+    if (GetArenaForAllocation() == nullptr) {
+      delete _impl_.control_.cap_vel_and_accel_;
+    }
+    clear_has_control();
+  }
+}
+inline ::robot::control::CapVelAndAccel* RobotCommand::release_cap_vel_and_accel() {
+  // @@protoc_insertion_point(field_release:robot.control.RobotCommand.cap_vel_and_accel)
+  if (_internal_has_cap_vel_and_accel()) {
+    clear_has_control();
+    ::robot::control::CapVelAndAccel* temp = _impl_.control_.cap_vel_and_accel_;
+    if (GetArenaForAllocation() != nullptr) {
+      temp = ::PROTOBUF_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
+    }
+    _impl_.control_.cap_vel_and_accel_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline const ::robot::control::CapVelAndAccel& RobotCommand::_internal_cap_vel_and_accel() const {
+  return _internal_has_cap_vel_and_accel()
+      ? *_impl_.control_.cap_vel_and_accel_
+      : reinterpret_cast< ::robot::control::CapVelAndAccel&>(::robot::control::_CapVelAndAccel_default_instance_);
+}
+inline const ::robot::control::CapVelAndAccel& RobotCommand::cap_vel_and_accel() const {
+  // @@protoc_insertion_point(field_get:robot.control.RobotCommand.cap_vel_and_accel)
+  return _internal_cap_vel_and_accel();
+}
+inline ::robot::control::CapVelAndAccel* RobotCommand::unsafe_arena_release_cap_vel_and_accel() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:robot.control.RobotCommand.cap_vel_and_accel)
+  if (_internal_has_cap_vel_and_accel()) {
+    clear_has_control();
+    ::robot::control::CapVelAndAccel* temp = _impl_.control_.cap_vel_and_accel_;
+    _impl_.control_.cap_vel_and_accel_ = nullptr;
+    return temp;
+  } else {
+    return nullptr;
+  }
+}
+inline void RobotCommand::unsafe_arena_set_allocated_cap_vel_and_accel(::robot::control::CapVelAndAccel* cap_vel_and_accel) {
+  clear_control();
+  if (cap_vel_and_accel) {
+    set_has_cap_vel_and_accel();
+    _impl_.control_.cap_vel_and_accel_ = cap_vel_and_accel;
+  }
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:robot.control.RobotCommand.cap_vel_and_accel)
+}
+inline ::robot::control::CapVelAndAccel* RobotCommand::_internal_mutable_cap_vel_and_accel() {
+  if (!_internal_has_cap_vel_and_accel()) {
+    clear_control();
+    set_has_cap_vel_and_accel();
+    _impl_.control_.cap_vel_and_accel_ = CreateMaybeMessage< ::robot::control::CapVelAndAccel >(GetArenaForAllocation());
+  }
+  return _impl_.control_.cap_vel_and_accel_;
+}
+inline ::robot::control::CapVelAndAccel* RobotCommand::mutable_cap_vel_and_accel() {
+  ::robot::control::CapVelAndAccel* _msg = _internal_mutable_cap_vel_and_accel();
+  // @@protoc_insertion_point(field_mutable:robot.control.RobotCommand.cap_vel_and_accel)
+  return _msg;
+}
+
 inline bool RobotCommand::has_control() const {
   return control_case() != CONTROL_NOT_SET;
 }
@@ -3061,6 +3400,8 @@ inline RobotCommand::ControlCase RobotCommand::control_case() const {
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__
+// -------------------------------------------------------------------
+
 // -------------------------------------------------------------------
 
 // -------------------------------------------------------------------

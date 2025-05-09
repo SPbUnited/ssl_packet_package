@@ -9,6 +9,7 @@ enum RobotControlType {
     SPEED_CONTROL = 2;
     COORDINATE_CONTROL = 3;
     GLOBAL_COORDINATES = 4;
+    CAP_VEL_AND_ACCEL = 5;
 }
 
 message OldFormat {
@@ -71,6 +72,11 @@ message GlobalCoordinates {
     required float angle = 3; // [rad]
 }
 
+message CapVelAndAccel {
+    required float max_vel = 1; // [m/s]
+    required float max_accel = 2; // [m/s^2]
+}
+
 message RobotCommand {
     // optional so that it always prints when id is 0
     // https://stackoverflow.com/questions/47373976/why-is-my-protobuf-message-in-python-ignoring-zero-values
@@ -82,5 +88,6 @@ message RobotCommand {
         SpeedControl speed_control = 4;
         CoordinateControl coordinate_control = 5;
         GlobalCoordinates global_coordinates = 6;
+        CapVelAndAccel cap_vel_and_accel = 7;
     }
 }
