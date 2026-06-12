@@ -1,0 +1,5 @@
+services:
+  ssl_packet_package:
+    build:
+      context: .
+      dockerfile: Dockerfile
