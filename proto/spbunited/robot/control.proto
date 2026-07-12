@@ -14,11 +14,11 @@ enum RobotControlType {
 }
 
 message OldFormat {
-    required float vel_x = 1;
-    required float vel_y = 2;
-    required float angular_velocity_or_delta_angle = 3;
-    required float kicker_setting = 4;
-    required float dribbler_setting = 5;
+    required sint32 vel_x = 1;
+    required sint32 vel_y = 2;
+    required sint32 angular_velocity_or_delta_angle = 3;
+    required uint32 kicker_setting = 4;
+    required uint32 dribbler_setting = 5;
 
     reserved 6;
     required bool autokick_straight = 7;
