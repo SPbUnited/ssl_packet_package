@@ -2,9 +2,29 @@ syntax = "proto2";
 
 package robot.telemetry;
 
-message RobotTelemetry {
-    required bool ball_in = 1;
-    required bool ball_deep = 2;
-    required float kicker_voltage = 3;
-    optional float battery_voltage = 4;
+
+message BallPosition {
+    required float x = 1; // [m]
+    required float y = 2; // [m]
 }
+
+message StrategyTelemetry {
+    optional bool ball_in = 1;
+    optional bool ball_deep = 2;
+    optional float kicker_voltage = 3;
+    optional BallPosition ball_position = 4;
+}
+
+message RaspberryStatus {
+    optional float power_voltage = 1;
+    optional float detect_fps = 2;
+    optional float detect_delay = 3;
+    optional float rpi_temp = 4;
+    optional float hat_temp = 5;
+}
+
+ message RobotTelemetry {
+    required StrategyTelemetry strategy_telemetry = 1;
+    optional RaspberryStatus raspberry_status= 2;
+ }
+ 
