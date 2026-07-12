@@ -89,7 +89,7 @@ message RobotCommand {
     // optional so that it always prints when id is 0
     // https://stackoverflow.com/questions/47373976/why-is-my-protobuf-message-in-python-ignoring-zero-values
     required uint32 robot_id = 1;
-    required RobotControlType RobotControlType = 2;
+    required RobotControlType robot_control_type = 2;
 
     oneof control {
         OldFormat old_format = 3;
