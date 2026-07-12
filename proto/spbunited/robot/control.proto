@@ -10,6 +10,7 @@ enum RobotControlType {
     COORDINATE_CONTROL = 3;
     GLOBAL_COORDINATES = 4;
     CAP_VEL_AND_ACCEL = 5;
+    NEW_FORMAT = 6;
 }
 
 message OldFormat {
@@ -35,6 +36,7 @@ enum KickerMode {
     KICK_HIGH = 2;
     AUTOKICK_STRAIGHT = 3;
     AUTOKICK_HIGH = 4;
+    AUTOKICK_MOMENTUM = 5;
 }
 
 message KickerAndDribbler {
@@ -50,6 +52,7 @@ message SpeedControl {
     oneof angular_velocity_or_angle {
         float angular_velocity = 3; // [rad/s]
         float delta_angle = 4; // [rad]
+        float global_angle = 5; // [rad]
     }
 }
 
@@ -77,17 +80,24 @@ message CapVelAndAccel {
     required float max_accel = 2; // [m/s^2]
 }
 
+message NewFormat {
+    required KickerAndDribbler kicker_and_dribbler = 1;
+    required SpeedControl speed_control = 2;
+}
+
 message RobotCommand {
     // optional so that it always prints when id is 0
     // https://stackoverflow.com/questions/47373976/why-is-my-protobuf-message-in-python-ignoring-zero-values
     required uint32 robot_id = 1;
+    required RobotControlType RobotControlType = 2;
 
     oneof control {
-        OldFormat old_format = 2;
-        KickerAndDribbler kicker_and_dribbler = 3;
-        SpeedControl speed_control = 4;
-        CoordinateControl coordinate_control = 5;
-        GlobalCoordinates global_coordinates = 6;
-        CapVelAndAccel cap_vel_and_accel = 7;
+        OldFormat old_format = 3;
+        KickerAndDribbler kicker_and_dribbler = 4;
+        SpeedControl speed_control = 5;
+        CoordinateControl coordinate_control = 6;
+        GlobalCoordinates global_coordinates = 7;
+        CapVelAndAccel cap_vel_and_accel = 8;
+        NewFormat new_format = 9;
     }
 }
