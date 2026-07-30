@@ -24,7 +24,8 @@ message RaspberryStatus {
 }
 
  message RobotTelemetry {
-    required StrategyTelemetry strategy_telemetry = 1;
-    optional RaspberryStatus raspberry_status= 2;
+    required uint32 robot_id = 1;
+    required StrategyTelemetry strategy_telemetry = 2;
+    optional RaspberryStatus raspberry_status= 3;
  }
  
