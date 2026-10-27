@@ -11,6 +11,7 @@ enum RobotControlType {
     GLOBAL_COORDINATES = 4;
     CAP_VEL_AND_ACCEL = 5;
     NEW_FORMAT = 6;
+    RICOCHET = 7;
 }
 
 message OldFormat {
@@ -85,6 +86,15 @@ message NewFormat {
     required SpeedControl speed_control = 2;
 }
 
+// Drive to (x, y) holding angle; once the onboard camera sees the ball,
+// shift sideways to meet it without turning
+message Ricochet {
+    required float x = 1; // [m]
+    required float y = 2; // [m]
+    required float angle = 3; // [rad]
+    optional KickerAndDribbler kicker_and_dribbler = 4;
+}
+
 message RobotCommand {
     // optional so that it always prints when id is 0
     // https://stackoverflow.com/questions/47373976/why-is-my-protobuf-message-in-python-ignoring-zero-values
@@ -99,5 +109,6 @@ message RobotCommand {
         GlobalCoordinates global_coordinates = 7;
         CapVelAndAccel cap_vel_and_accel = 8;
         NewFormat new_format = 9;
+        Ricochet ricochet = 10;
     }
 }
