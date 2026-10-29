@@ -111,4 +111,6 @@ message RobotCommand {
         NewFormat new_format = 9;
         Ricochet ricochet = 10;
     }
+
+    optional bool beep = 11; // sound the buzzer while commands with beep keep coming
 }
