@@ -18,7 +18,7 @@ message OldFormat {
     required sint32 vel_x = 1;
     required sint32 vel_y = 2;
     required sint32 angular_velocity_or_delta_angle = 3;
-    required uint32 kicker_setting = 4;
+    required uint32 kicker_setting = 4; // 0 - don't charge, 1..15 - 100..330 V
     required uint32 dribbler_setting = 5;
 
     reserved 6;
@@ -43,7 +43,7 @@ enum KickerMode {
 message KickerAndDribbler {
     required KickerMode kicker_mode = 1;
 
-    required uint32 kicker_setting = 2;
+    required uint32 kicker_voltage = 2; // [V] capacitor target 0..330, 0 - don't charge
     required uint32 dribbler_setting = 3;
 }
 
