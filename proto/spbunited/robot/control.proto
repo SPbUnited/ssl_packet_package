@@ -88,11 +88,12 @@ message NewFormat {
 }
 
 // Drive to (x, y) holding angle; once the onboard camera sees the ball,
-// shift sideways to meet it without turning
+// shift sideways to meet it without turning.
+// Without angle the robot picks the heading that sends the ball into the goal
 message Ricochet {
     required float x = 1; // [m]
     required float y = 2; // [m]
-    required float angle = 3; // [rad]
+    optional float angle = 3; // [rad]
     optional KickerAndDribbler kicker_and_dribbler = 4;
 }
 
