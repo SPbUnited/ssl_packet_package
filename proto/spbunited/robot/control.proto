@@ -12,6 +12,7 @@ enum RobotControlType {
     CAP_VEL_AND_ACCEL = 5;
     NEW_FORMAT = 6;
     RICOCHET = 7;
+    CATCH_BALL = 8;
 }
 
 message OldFormat {
@@ -95,6 +96,13 @@ message Ricochet {
     optional KickerAndDribbler kicker_and_dribbler = 4;
 }
 
+// Turn to angle and wait for the ball: no driving forward,
+// shift sideways to meet the ball seen by the onboard camera
+message CatchBall {
+    required float angle = 1; // [rad]
+    required KickerAndDribbler kicker_and_dribbler = 2;
+}
+
 message RobotCommand {
     // optional so that it always prints when id is 0
     // https://stackoverflow.com/questions/47373976/why-is-my-protobuf-message-in-python-ignoring-zero-values
@@ -110,6 +118,7 @@ message RobotCommand {
         CapVelAndAccel cap_vel_and_accel = 8;
         NewFormat new_format = 9;
         Ricochet ricochet = 10;
+        CatchBall catch_ball = 12;
     }
 
     optional bool beep = 11; // sound the buzzer while commands with beep keep coming
